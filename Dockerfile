@@ -31,15 +31,15 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     cmake . && \
     make install -j4 && \
     cd .. && \
-    git clone https://github.com/tindy2013/subconverter --depth=1 && \
-    cd subconverter && \
+    git clone https://github.com/tpdh/subconverter-a --depth=1 && \
+    cd subconverter-a && \
     git describe --exact-match HEAD || (sha=$(git rev-parse --short HEAD) && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1-'"$sha"'/' src/version.h) ;\
     cmake -DCMAKE_BUILD_TYPE=Release . && \
     make -j4 && \
-    mv subconverter /usr/bin && \
+    mv subconverter-a /usr/bin && \
     mv base ../ && \
     cd .. && \
-    rm -rf subconverter quickjspp libcron toml11 && \
+    rm -rf subconverter-a quickjspp libcron toml11 && \
     apk add --no-cache --virtual subconverter-deps pcre2 libcurl yaml-cpp libevent && \
     apk del .build-tools .build-deps
 
